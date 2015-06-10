@@ -1,0 +1,90 @@
+<!-- Validation failure messages -->
+
+<% if @meal.errors.any? %>
+  <% @meal.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- Responsive panel example -->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Add Meal</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/create_meal" method="post" class="form-horizontal">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for name -->
+          <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">
+              Name
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @meal.name %>">
+            </div>
+          </div>
+
+          <!-- Label and input for recipe_id -->
+          <div class="form-group">
+            <label for="recipe_id" class="col-sm-2 control-label">
+              Recipe
+            </label>
+            <div class="col-sm-10">
+              <%= select_tag(:recipe_id, options_from_collection_for_select(Recipe.all, :id, :name, @recipe_id), :class => "form-control") %>
+            </div>
+          </div>
+
+          <!-- Label and input for day -->
+          <div class="form-group">
+            <label for="day" class="col-sm-2 control-label">
+              Day
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="day" name="day" placeholder="Day" class="form-control" value="<%= @meal.day %>">
+            </div>
+          </div>
+
+          <!-- Label and input for category -->
+          <div class="form-group">
+            <label for="category" class="col-sm-2 control-label">
+              Category
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="<%= @meal.category %>">
+            </div>
+          </div>
+
+          <!-- Label and input for diet_id -->
+          <div class="form-group">
+            <label for="diet_id" class="col-sm-2 control-label">
+              Diet
+            </label>
+            <div class="col-sm-10">
+              <%= select_tag(:diet_id, options_from_collection_for_select(Diet.all, :id, :name, @diet_id), :class => "form-control") %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-success">
+                Create Meal
+              </button>
+              or
+              <a href="/meals">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End responsive panel example -->
