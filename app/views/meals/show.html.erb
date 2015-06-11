@@ -64,6 +64,7 @@
   </div>
 </div>
 </div>
+
 <% @meal.recipe.recipe_ingredients.each do |recipe_ingredient| %>
 <li> <%=recipe_ingredient.ingredient.name %> <%=recipe_ingredient.quantity %> <%=recipe_ingredient.ingredient.unit %></li>
 <% end %>
